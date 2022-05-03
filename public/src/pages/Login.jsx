@@ -21,6 +21,12 @@ function Login() {
     draggable:true,
     theme:"dark",
 };
+useEffect(()=>{
+  if(localStorage.getItem("chat-app-user")){
+      Navigate("/")
+  }
+},[]);
+ 
   const handleSubmit =async (event) => {
     event.preventDefault();
     if(handleValidation()){
@@ -34,6 +40,7 @@ function Login() {
         localStorage.setItem("chat-app-user",JSON.stringify(data.user));
         Navigate("/")
       }
+
 
 
           
