@@ -13,7 +13,7 @@ function SetAvatar() {
   const Navigate = useNavigate();
   const [avatar, setAvatar] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedAvatar, setSelectedAvatar] = useState(undefined);
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
 
   const toastOptions = {
     position: "bottom-right",
@@ -22,14 +22,41 @@ function SetAvatar() {
     draggable: true,
     theme: "dark",
   };
+  //async useeffect hookk
+  // useEffect(() => {
+  //   async function checkLocal () {
+
+  //     if (!localStorage.getItem("chat-app-user")) {
+  //       Navigate("/login");
+  //     }
+  //   }
+  //   checkLocal();
+  //   }, []);
+
   const setProfilePicture = async () => {
-    if (selectedAvatar === undefined) {
+    if (selectedAvatar !== null) {    
+      const user = await JSON.parse(localStorage.getItem("chat-app-user"));
+      const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+        image:avatar[selectedAvatar]
+      })
+      if (data.isSet) {
+        user.isAvatarImageSet = true;
+        user.avatarImage = data.image;
+        localStorage.setItem("chat-app-user", JSON.stringify(user));
+        toast.success("Avatar set", toastOptions);
+        Navigate("/");
+    }
+    else {
+      toast.error("Error setting avatar Please try again", toastOptions);
+    }
+    }
+    else {
       toast.error("Please select a Profile Picture", toastOptions);
-      
     }
   };
 
   useEffect(() => {
+    if(localStorage.getItem("chat-app-user")){
     async function fetchData() {
       const data = [];
       for (let i = 0; i < 4; i++) {
@@ -48,6 +75,10 @@ function SetAvatar() {
       setIsLoading(false);
     }
     fetchData();
+  }
+  else{
+    Navigate("/login");
+  }
   }, []);
 
   return (
