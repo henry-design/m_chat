@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo192.png";
 import { ToastContainer, toast } from "react-toastify";
 import"react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -22,10 +22,10 @@ function Register() {
     theme:"dark",
 };
 useEffect(()=>{
-  if(localStorage.getItem("chat-app-user")){
+  if(localStorage.getItem("app-user")){
       Navigate("/")
   }
-},[]);
+},[Navigate]);
   const handleSubmit =async (event) => {
     event.preventDefault();
     if(handleValidation()){
@@ -36,7 +36,7 @@ useEffect(()=>{
         toast.error(data.msg,toastOptions);}
         if(data.status){
         toast.success(data.msg,toastOptions);
-        localStorage.setItem("chat-app-user",JSON.stringify(data.user));
+        localStorage.setItem("app-user",JSON.stringify(data.user));
         Navigate("/")
       }
 
@@ -78,7 +78,7 @@ useEffect(()=>{
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <img src={Logo} alt="" />
-            <h1>snappy</h1>
+            <h1>GOSOFT</h1>
           </div>
           <input
             type="text"

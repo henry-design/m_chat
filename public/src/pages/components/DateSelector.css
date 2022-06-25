@@ -1,0 +1,36 @@
+.date-selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.date-picker-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.date-picker-container input {
+    width: 100%;
+    border: 1px solid #0d1453;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgb(238, 238, 245);
+    font-family: 'Poppins', sans-serif;
+    margin: 0px;
+    background-color: #2511a7;
+    text-align: center;
+}
+
+h4 {
+    font-weight: 700;
+    color: rgb(32, 32, 34);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
